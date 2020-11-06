@@ -50,7 +50,9 @@ echo "::debug::Using \"${GEM_SRC}\" as Gem directory"
 
 cd $GEM_SRC
 
-bundle config set deployment true
+if [ -n "${INPUT_NO_LOCKFILE}" ]; then
+  bundle config set deployment true
+fi
 bundle config path "$PWD/vendor/bundle"
 bundle install
 echo "::debug::Completed bundle install"
